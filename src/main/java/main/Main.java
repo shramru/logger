@@ -46,6 +46,10 @@ public class Main {
             sb.append(request.getRemoteAddr());
             sb.append(':');
             sb.append(request.getRemotePort());
+            sb.append("\nTo server: ");
+            sb.append(request.getServerName());
+            sb.append(':');
+            sb.append(request.getServerPort());
             sb.append("\nUser-Agent: ");
             sb.append(request.getHeader("User-Agent"));
 
@@ -63,8 +67,9 @@ public class Main {
                     }
                 }
             }
-            sb.append('\n');
-            pw.print(sb.toString());
+            final String record = sb.toString();
+            pw.println(record);
+            System.out.println(record);
             pw.flush();
         });
 
