@@ -10,6 +10,9 @@ import webhandlers.WebHandler;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -34,9 +37,12 @@ public class Main {
         final FileOutputStream fos = new FileOutputStream(logFile, true);
         //noinspection resource,IOResourceOpenedButNotSafelyClosed
         final PrintWriter pw = new PrintWriter(fos);
+        final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
         server.setRequestLog((request, response) -> {
             final StringBuilder sb = new StringBuilder();
+            sb.append(dateFormat.format(new Date()));
+            sb.append('\n');
             sb.append(request.getMethod());
             sb.append("\nFrom Host: ");
             sb.append(request.getRemoteHost());
